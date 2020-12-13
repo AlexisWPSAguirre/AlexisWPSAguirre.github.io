@@ -1,0 +1,20 @@
+{% extends 'layouts/base.html' %}
+{% block title %}
+    Crear Categoría
+{% endblock %}
+{% block content %}
+    <form action="{{url_for('create_product')}}" method="POST">
+        <label for="name">Nombre</label>
+        <input type="text" id="name" name="name" required>
+        <label for="price">Precio</label>
+        <input type="text" id="price" name="price" required>
+        <label for="categorie">Categoría</label>
+        <select name="categorie">
+            {% for categorie in categories %}
+            <option value={{categorie[2]}}>{{categorie[2]}}</option>
+            {% endfor %}
+        </select>
+        <a href="{{url_for('categorie')}}">Volver</a>
+        <button type="submit">Guardar Producto</button>
+    </form>
+{% endblock %}

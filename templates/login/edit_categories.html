@@ -1,0 +1,13 @@
+{% extends 'layouts/base.html'%}
+{% block title %}
+    Editar Categoría
+{% endblock %}
+{% block content %}
+    <form method="POST">
+        <label for="name">Nombre</label>
+        <input type="text" id="name" name="name" value="{{categoria[2]}}" required>
+        <a href="{{url_for('categorie')}}">Volver</a>
+        <button type="submit">Editar</button>
+    </form>
+    
+{% endblock %}

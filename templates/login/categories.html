@@ -6,16 +6,21 @@
     <table>
         <thead>
             <th>ID</th>
-            <th>Nombre Categoría</th>
+            <th>Nombre de Categoría</th>
         </thead>
-    
-        <tbody>    
+        <tbody>
             {% for categorie in categories %}
             <tr>
                 <td>{{categorie[0]}}</td>
                 <td>{{categorie[2]}}</td>
+                <td>
+                    <a href="{{url_for('edit_categories',id=categorie[0])}}">Editar</a>
+                    <a href="{{url_for('delete_categories',id=categorie[0])}}">Eliminar</a>
+                </td>
             </tr>
             {% endfor %}
+            <a href="{{url_for('create_categories')}}">Crear Categoría</a>
         </tbody>
     </table>
+    
 {% endblock %}

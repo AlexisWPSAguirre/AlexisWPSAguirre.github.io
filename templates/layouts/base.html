@@ -12,19 +12,30 @@
                 <a href="{{ url_for ('index') }}">Inicio</a>
             </li>
             <li>
-                <a href="{{ url_for ('categories') }}">Categorias</a>
-            </li>
-            <!-- <li>
-                <a href="{{ url_for ('index') }}">Contacto</a>
+                <a href="{{ url_for ('categorie') }}">Categorias</a>
             </li>
             <li>
-                <a href="{{ url_for ('index') }}">Usuarios</a>
+                <a href="{{ url_for ('product') }}">Productos</a>
             </li>
-            <li> -->
-                <!-- <a href="{{ url_for ('index') }}">Usuarios</a>
-            </li> -->
+            <li>
+                <a href="{{ url_for ('user') }}">Perfil de Usuario</a>
+            </li>
+            <li>
+                <a href="{{ url_for ('logout') }}">Cerrar Sesión</a>
+            </li>
         </ul>
     </nav>
+    {% with messages = get_flashed_messages(category_filter=['success']) %}
+        {% if messages %}
+            <ul style='color: green'>
+                {% for message in messages %}
+                    <li>
+                        {{ message }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
     {% block content %}{% endblock %}
 </body>
 </html>

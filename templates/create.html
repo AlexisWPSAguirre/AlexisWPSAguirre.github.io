@@ -6,19 +6,32 @@
     <title>Crear cuenta</title>
 </head>
 <body>
+    {% with messages = get_flashed_messages(category_filter=['error']) %}
+        {% if messages %}
+            <ul style='color: red'>
+                {% for message in messages %}
+                    <li>
+                        {{ message }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
     <form action="{{url_for('create')}}" method="POST">
         <div>
             <label for="name">Nombre</label>
-            <input type="text" id="name" name="name">
+            <input type="text" id="name" name="name" required>
         </div>
         <div>
             <label for="email">Correo</label>
-            <input type="text" id="email" name="email">
+            <input type="email" id="email" name="email" placeholder="@example.servidor.com" required>
         </div>
         <div>    
             <label for="password">Contraseña</label>
-            <input type="text" id="password" name="password">
+            <input type="password" id="password" name="password" required>
         </div>
+        <a href="{{url_for('start')}}">Volver</a>
         <button type="submit" >Crear cuenta</button>
     </form>
 </body>

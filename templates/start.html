@@ -6,14 +6,27 @@
     <title>Inicio</title>
 </head>
 <body>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>
+                        {{ message }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+    
     <form action="{{ url_for('start')}}" method="POST">
         <div>
             <label for="email">Email</label>
-            <input type="text" id="email" name="email">
+            <input type="text" id="email" name="email"  required>
         </div>
         <div>
             <label for="password">Password</label>
-            <input type="password" id="password" name="password">
+            <input type="password" id="password" name="password" required>
         </div>
         <button type="submit">Ingresar</button>
         <a href="{{url_for('create')}}">Registrate aqui</a>

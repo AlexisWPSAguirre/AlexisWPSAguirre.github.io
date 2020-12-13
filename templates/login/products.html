@@ -1,0 +1,32 @@
+{% extends 'layouts/base.html'%}
+{% block title %}
+Productos
+{% endblock %}
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Nombre</td>
+                <td>Precio</td>
+                <td>Categoria</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>{{product[0]}}</td>
+                <td>{{product[3]}}</td> 
+                <td>{{product[4]}}</td> 
+                <td>{{product[2]}}</td>
+                <td>
+                    <a href="{{url_for('edit_product', id=product[0])}}">Editar</a>
+                    <a href="{{url_for('delete_product', id=product[0])}}">Eliminar</a>
+                </td> 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{url_for('create_product')}}">Crear productos</a>
+{% endblock %}

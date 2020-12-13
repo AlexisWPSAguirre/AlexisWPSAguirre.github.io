@@ -1,0 +1,19 @@
+{% extends 'layouts/base.html'%}
+{% block title %}
+    Editar Producto
+{% endblock %}
+{% block content %}
+    <form method="POST">
+        <label for="name">Nombre</label>
+        <input type="text" id="name" name="name" value="{{product[3]}}" required>
+        <label for="price">Precio</label>
+        <input type="text" id="price" name="price" value="{{product[4]}}" required>
+        <select name="categorie">
+            {% for categorie in categories %}
+                <option value="{{categorie[2]}}">{{categorie[2]}}</option>
+            {% endfor %}
+        </select>
+        <a href="{{url_for('product')}}">Volver</a>
+        <button type="submit">Editar</button>
+    </form>
+{% endblock %}
