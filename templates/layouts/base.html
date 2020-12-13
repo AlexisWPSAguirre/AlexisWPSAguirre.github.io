@@ -36,6 +36,18 @@
             </ul>
         {% endif %}
     {% endwith %}
+    {% with messages = get_flashed_messages(category_filter=['error']) %}
+        {% if messages %}
+            <ul style='color: red'>
+                {% for message in messages %}
+                    <li>
+                        {{ message }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
     {% block content %}{% endblock %}
+    
 </body>
 </html>

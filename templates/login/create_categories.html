@@ -5,7 +5,7 @@ Crear Categoría
 {% block content %}
     <form method="POST" action="{{url_for('create_categories')}}">
         <label for="categorie">Nombre categoría</label>
-        <input type="text" id="categorie" name="categorie" required>
+        <input type="text" id="categorie" name="categorie" >
         <a href="{{url_for('categorie')}}">Volver</a>
         <button type="submit">Crear</button>
     </form>

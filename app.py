@@ -4,6 +4,11 @@ app = Flask(__name__)
 app.secret_key = 'md5'
 db = sqlite3.connect('data.db', check_same_thread=False)
 
+def val_empty(a=None, b=None, c=None):
+    if a == '' or b == '' or c == '':
+        flash('Todos los campos son obligatorios', 'error')
+        return False
+
 def global_cp():
     global categories
     categories = db.execute("""select * from categorias where id_usuario = ?""",(session['usuario'][0],)).fetchall()
@@ -24,6 +29,8 @@ def start():
     email = request.form.get('email')
     password = request.form.get('password')
     cursor = db.cursor()
+    if val_empty(email,password) == False:
+        return redirect(request.url)
     global usuario 
     usuario = cursor.execute(""" select * from usuarios where email = ? and password = ?""",(email,password,)).fetchone()
     if usuario is None:
@@ -42,12 +49,13 @@ def index():
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():
-
     if request.method == 'GET':
         return render_template('create.html')
     name = request.form.get('name')
     email = request.form.get('email')
     password = request.form.get('password')
+    if val_empty(name,email,password) == False:
+        return redirect(request.url)
     try:
         cursor = db.cursor()
         cursor.execute(""" insert into usuarios 
@@ -67,7 +75,6 @@ def categorie():
     if not 'usuario' in session:
         return redirect(url_for('start'))
     global_cp()
-    cont = 1
     return render_template('login/categories.html', categories = categories)
 
 @app.route('/categories/create', methods=['GET','POST'])
@@ -77,6 +84,8 @@ def create_categories():
     if request.method == 'GET':
         return render_template('login/create_categories.html')
     categoria = request.form.get('categorie')
+    if val_empty(categoria) == False:
+        return redirect(request.url)
     cursor = db.cursor()
     cursor.execute("""INSERT INTO categorias(id_usuario, nombre_categoria) values (?,?)""",(session['usuario'][0],categoria,))
     db.commit()
@@ -91,6 +100,8 @@ def edit_categories(id):
         categoria = db.execute(""" SELECT * FROM categorias WHERE id = ? """,(id,)).fetchone()
         return render_template('login/edit_categories.html', categoria = categoria)
     name = request.form.get('name')
+    if val_empty(name) == False:
+        return redirect(request.url)
     cursor = db.cursor()
     cursor.execute(""" UPDATE categorias SET nombre_categoria = ? WHERE id = ?""",(name,id,))
     db.commit()
@@ -126,6 +137,8 @@ def create_product():
     name = request.form.get('name')
     price = request.form.get('price')
     categorie = request.form.get('categorie')
+    if val_empty(name,price,categorie) == False:
+        return redirect(request.url)
     cursor = db.cursor()
     cursor.execute("""INSERT INTO productos(id_usuario,categoria,nombre,precio) VALUES (?,?,?,?)""",(session['usuario'][0],categorie,name,price,))
     db.commit()
@@ -143,6 +156,8 @@ def edit_product(id):
     name = request.form.get('name')
     price = request.form.get('price')
     categorie = request.form.get('categorie')
+    if val_empty(name,price,categorie) == False:
+        return redirect(request.url)
     cursor = db.cursor()
     cursor.execute(""" UPDATE productos SET nombre = ?, precio = ?, categoria = ? WHERE id = ? """,(name,price,categorie,id))
     db.commit()
@@ -168,6 +183,8 @@ def user():
     name = request.form.get('name')
     email = request.form.get('email')
     password = request.form.get('password')
+    if val_empty(name,email,password) == False:
+        return redirect(request.url)
     cursor = db.cursor()
     cursor.execute(""" UPDATE usuarios SET name = ?,email = ?,password = ? WHERE id = ? """,(name,email,password,session['usuario'][0],))
     db.commit()
