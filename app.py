@@ -25,19 +25,16 @@ def logout():
 def start():
     if request.method == 'GET':
         return render_template('start.html')
-    
     email = request.form.get('email')
     password = request.form.get('password')
     cursor = db.cursor()
     if val_empty(email,password) == False:
         return redirect(request.url)
-    global usuario 
     usuario = cursor.execute(""" select * from usuarios where email = ? and password = ?""",(email,password,)).fetchone()
     if usuario is None:
         flash('Correo Electronico y Password no coinciden','error')
         return redirect(request.url)
     session['usuario'] = usuario
-    
     return redirect(url_for('index'))
 
 
@@ -110,7 +107,6 @@ def edit_categories(id):
 
 @app.route('/categories/delete/<int:id>')
 def delete_categories(id):
-    global_cp() 
     if not 'usuario' in session:
         return redirect(url_for('start'))
     cursor = db.cursor()
@@ -137,7 +133,7 @@ def create_product():
     name = request.form.get('name')
     price = request.form.get('price')
     categorie = request.form.get('categorie')
-    if val_empty(name,price,categorie) == False:
+    if val_empty(name,price,categorie) == False or categorie == 'Disponible':
         return redirect(request.url)
     cursor = db.cursor()
     cursor.execute("""INSERT INTO productos(id_usuario,categoria,nombre,precio) VALUES (?,?,?,?)""",(session['usuario'][0],categorie,name,price,))
@@ -161,7 +157,7 @@ def edit_product(id):
     cursor = db.cursor()
     cursor.execute(""" UPDATE productos SET nombre = ?, precio = ?, categoria = ? WHERE id = ? """,(name,price,categorie,id))
     db.commit()
-    flash('Producto '+categorie+' Editado Satisfactoriamente','sucess')
+    flash('Producto '+categorie+' Editado Satisfactoriamente','success')
     return redirect(url_for('product'))
 
 @app.route('/product/delete/<int:id>')

@@ -3,30 +3,38 @@
 Productos
 {% endblock %}
 {% block content %}
-    <table>
-        <thead>
-            <tr>
-                <td>ID</td>
-                <td>Nombre</td>
-                <td>Precio</td>
-                <td>Categoria</td>
-                <td></td>
-            </tr>
-        </thead>
-        <tbody>
-            {% for product in products %}
-            <tr>
-                <td>{{product[0]}}</td>
-                <td>{{product[3]}}</td> 
-                <td>{{product[4]}}</td> 
-                <td>{{product[2]}}</td>
-                <td>
-                    <a href="{{url_for('edit_product', id=product[0])}}">Editar</a>
-                    <a href="{{url_for('delete_product', id=product[0])}}">Eliminar</a>
-                </td> 
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <a href="{{url_for('create_product')}}">Crear productos</a>
+    <div class="row mt-5">
+        <div class="col-1"></div>
+        <div class="col-9">
+            <table class="table table-striped">
+                <thead class="bg-success" style="font-weight:500; font-size:large" >
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Categoria</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>{{loop.index}}</td>
+                        <td>{{product[3]}}</td> 
+                        <td>{{product[4]}}</td> 
+                        <td>{{product[2]}}</td>
+                        <td>
+                            <a class="btn btn-success"href="{{url_for('edit_product', id=product[0])}}">Editar</a>
+                            <a class="btn btn-danger" href="{{url_for('delete_product', id=product[0])}}">Eliminar</a>
+                        </td> 
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-2">
+            <a class="btn btn-dark" href="{{url_for('create_product')}}">Crear productos</a>
+        </div>
+    </div>
+    
 {% endblock %}

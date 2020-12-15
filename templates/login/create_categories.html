@@ -3,11 +3,20 @@
 Crear Categoría
 {% endblock %}
 {% block content %}
-    <form method="POST" action="{{url_for('create_categories')}}">
-        <label for="categorie">Nombre categoría</label>
-        <input type="text" id="categorie" name="categorie" >
-        <a href="{{url_for('categorie')}}">Volver</a>
-        <button type="submit">Crear</button>
-    </form>
+<div class="row mt-5" style="font-weight: 500; font-size: large;">
+    <div class="col-3"></div>
+    <div class="col-5">
+        <form method="POST" action="{{url_for('create_categories')}}">
+            <div class="mb-3">
+                <label for="categorie" class="form-label">Nombre categoría</label>
+                <input type="text" id="categorie" name="categorie" class="form-control" >
+            </div>
+            <div class="mb-3">
+                <a class="btn btn-dark" href="{{url_for('categorie')}}">Volver</a>
+                <button class="btn btn-success" type="submit">Crear</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 {% endblock %}

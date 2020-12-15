@@ -3,17 +3,32 @@
     Editar Producto
 {% endblock %}
 {% block content %}
-    <form method="POST">
-        <label for="name">Nombre</label>
-        <input type="text" id="name" name="name" value="{{product[3]}}" required>
-        <label for="price">Precio</label>
-        <input type="text" id="price" name="price" value="{{product[4]}}" required>
-        <select name="categorie">
-            {% for categorie in categories %}
-                <option value="{{categorie[2]}}">{{categorie[2]}}</option>
-            {% endfor %}
-        </select>
-        <a href="{{url_for('product')}}">Volver</a>
-        <button type="submit">Editar</button>
-    </form>
+<div class="row m-5">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <form method="POST">
+            <div class="mb-3">
+                <label for="name" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{product[3]}}" required>
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Precio</label>
+                <input type="text" class="form-control" id="price" name="price" value="{{product[4]}}" required>
+            </div>
+            <div class="mb-3">
+                <label for="selected" class="form-label">Categorías</label>
+                <select id="selected" name="categorie" required class="form-control">
+                    <option value="" selected>Disponibles</option>
+                    {% for categorie in categories %}
+                    <option value="{{categorie[2]}}">{{categorie[2]}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <a class="btn btn-dark" href="{{url_for('product')}}">Volver</a>
+                <button class="btn btn-success" type="submit">Editar</button>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}

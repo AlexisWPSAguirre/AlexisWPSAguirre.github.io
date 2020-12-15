@@ -3,11 +3,20 @@
     Editar Categoría
 {% endblock %}
 {% block content %}
-    <form method="POST">
-        <label for="name">Nombre</label>
-        <input type="text" id="name" name="name" value="{{categoria[2]}}" required>
-        <a href="{{url_for('categorie')}}">Volver</a>
-        <button type="submit">Editar</button>
-    </form>
+    <div class="row m-5" style="font-weight: 500; font-size: large;">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <form method="POST">
+                <div class="mb-3">
+                    <label class="form-label" for="name">Nombre</label>
+                    <input class="form-control" type="text" id="name" name="name" value="{{categoria[2]}}" required>
+                </div>
+                <div class="mb-3">
+                    <a class="btn btn-dark" href="{{url_for('categorie')}}">Volver</a>
+                    <button class="btn btn-success" type="submit">Editar</button>
+                </div>
+            </form>
+        </div>
+    </div>
     
 {% endblock %}

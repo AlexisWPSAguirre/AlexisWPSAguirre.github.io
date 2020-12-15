@@ -3,24 +3,34 @@
     Categorías
 {% endblock %}
 {% block content %}
-    <table>
-        <thead>
-            <th>ID</th>
-            <th>Nombre de Categoría</th>
-        </thead>
-        <tbody>
-            {% for categorie in categories %}
-            <tr>
-                <td>{{categorie[0]}}</td>
-                <td>{{categorie[2]}}</td>
-                <td>
-                    <a href="{{url_for('edit_categories',id=categorie[0])}}">Editar</a>
-                    <a href="{{url_for('delete_categories',id=categorie[0])}}">Eliminar</a>
-                </td>
-            </tr>
-            {% endfor %}
-            <a href="{{url_for('create_categories')}}">Crear Categoría</a>
-        </tbody>
-    </table>
-    
-{% endblock %}
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-9">
+                <table class="table mt-4 text-center table-striped"> 
+                    <thead class="bg-success" style="font-size: large; font-weight: 500;">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre de Categoría</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for categorie in categories %}
+                        <tr>
+                            <td>{{loop.index}}</td>
+                            <td>{{categorie[2]}}</td>
+                            <td>
+                                <div>
+                                    <a class="btn btn-success mr-3" href="{{url_for('edit_categories',id=categorie[0])}}">Editar</a>
+                                    <a class="btn btn-danger" href="{{url_for('delete_categories',id=categorie[0])}}">Eliminar</a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-2 text-left mt-4"><a class="btn btn-dark p-2" href="{{url_for('create_categories')}}">Crear productos</a></div>
+        </div>
+            
+        {% endblock %}
