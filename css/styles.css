@@ -3754,7 +3754,7 @@ textarea.form-control-lg {
   justify-content: space-between;
   padding: var(--bs-navbar-padding-y) var(--bs-navbar-padding-x);
 }
-.navbar > .container,
+.navbar > .fna,
 .navbar > .container-fluid,
 .navbar > .container-sm,
 .navbar > .container-md,
